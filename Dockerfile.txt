@@ -1,0 +1,37 @@
+# ---------------------------
+# 1️⃣ Base Image
+# ---------------------------
+FROM node:18-alpine
+# (Lightweight Node.js version)
+
+# ---------------------------
+# 2️⃣ Working Directory
+# ---------------------------
+WORKDIR /usr/src/app
+
+# ---------------------------
+# 3️⃣ Copy package files and install dependencies
+# ---------------------------
+COPY package*.json ./
+RUN npm install --production
+# (Installs only dependencies, not devDependencies)
+
+# ---------------------------
+# 4️⃣ Copy All Source Code
+# ---------------------------
+COPY . .
+
+# ---------------------------
+# 5️⃣ Set Environment Variable for Port
+# ---------------------------
+ENV PORT=8080
+
+# ---------------------------
+# 6️⃣ Expose Port
+# ---------------------------
+EXPOSE 8080
+
+# ---------------------------
+# 7️⃣ Start Command
+# ---------------------------
+CMD ["npm", "start"]
